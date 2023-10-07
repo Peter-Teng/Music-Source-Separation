@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Music Source Separation via Hybrid Waveform and Spectrogram Generative Adversarial Network Demo</title>
+</head>
+
+<style type="text/css">
+    html {
+        height: 100%;
+    }
+    
+    body {
+        margin: 0px;
+        height: 100%;
+        position: absolute;
+        background-color: aliceblue;
+    }
+    
+    th {
+        border: 1px solid #8e8e8e;
+        max-width: 250px;
+        font-weight: 500;
+        font-size: medium;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    
+    tr {
+        border: 1px solid #8e8e8e;
+        max-width: 250px;
+        text-align: center;
+        font-weight: 500;
+        font-size: medium;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    
+    table {
+        border: 1px solid #8e8e8e;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+    
+    img {
+        max-width: 80%;
+        max-height: 500px;
+    }
+    
+    audio {
+        max-width: 250px;
+    }
+    
+    #Banner {
+        position: relative;
+        margin-left: 0px;
+        margin-right: 0px;
+        display: block;
+        width: 100%;
+        height: 50%;
+        background: linear-gradient(45deg, rgb(255, 172, 55), rgb(63, 255, 127));
+        border-bottom: 2px solid rgb(251, 255, 4);
+    }
+    
+    #Title {
+        position: relative;
+        font-size: 3em;
+        text-align: center;
+        color: aliceblue;
+        margin: 0;
+        padding-top: 5%;
+    }
+    
+    #Demo {
+        position: relative;
+        font-size: 1.5em;
+        font-weight: bold;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.8);
+        margin: 0;
+        padding-top: 4%;
+    }
+    
+    #title {
+        position: relative;
+        font-size: 1.85em;
+        text-align: center;
+        font-weight: bolder;
+        color: rgb(50, 50, 50);
+        margin-top: 75px;
+    }
+    
+    #author {
+        position: relative;
+        font-size: 1em;
+        text-align: center;
+        font-weight: lighter;
+        font-style: italic;
+        color: rgb(50, 50, 50);
+        margin-top: 20px;
+    }
+    
+    .subtitle {
+        position: relative;
+        font-size: 1.5em;
+        text-align: center;
+        font-weight: bold;
+        font-style: italic;
+        color: rgb(0, 21, 67);
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .text {
+        position: relative;
+        font-size: 1.35em;
+        font-family: 'Times New Roman', Times, serif;
+        font-style: italic;
+        font-weight: 400;
+        text-align: justify;
+        color: rgb(22, 22, 22);
+        width: 60%;
+        margin: 15px auto;
+    }
+    
+    #images {
+        text-align: center;
+        margin: 20px auto;
+    }
+    
+    center {
+        display: block;
+        text-align: -webkit-center;
+    }
+</style>
+
+<body>
+    <div id="Banner">
+        <h1 id="Title">
+            Music Source Separation via Hybrid Waveform and Spectrogram Generative Adversarial Network
+        </h1>
+        <div id="Demo">
+            A Demo Page
+        </div>
+    </div>
+    <div>
+        <div id="title">
+            Music Source Separation via Hybrid Waveform and Spectrogram Generative Adversarial Network
+        </div>
+        <div id="author">
+            Manuscript Submission
+        </div>
+        <div class="subtitle">
+            Abstract
+        </div>
+        <div class="text">
+            &emsp;&emsp;Music source separation aims to disentangle individual sources from the mixture of musical signals. Existing generative adversarial network (GAN) based methods generally work on the spectrogram domain only. However, this practice ignores the
+            patterns from the waveform domain, which are more informative for modelling some categories of sources. In this paper, we propose a fully hybrid GAN framework to integrate knowledge from both domains. In particular, the generator formulates
+            acoustical patterns from waveform and spectrogram domains, while the discriminator provides discriminative information based on the local patch-level spectrograms such that the generator can produce more plausible separation results. Furthermore,
+            to enhance the quality of estimated sources, we devise a perceptual spectrogram loss term, which is a complement of the waveform-level loss. The experimental results on two widely used music source separation datasets demonstrate the superiority
+            of the proposed method compared with the state-of-the-art methods.
+        </div>
+        <div id="images">
+            <img src="./images/Generator.png" alt="Generator Display Error"> <br>
+            <img src="./images/Discriminator.png" alt="Discriminator Display Error" style="max-width: 30%; margin-top: 30px;">
+        </div>
+        <div class="subtitle">
+            Audio Samples (MIR-1K)
+        </div>
+        <div class="text">
+            &emsp;The following clip is selected from the MIR-1K dataset:
+            <br> &emsp;The sample is from the test set according to our train/test split policy (please refer to our preprocess script for MIR-1K dataset).
+            <br> &emsp;The sample is also a hard one for all models.
+        </div>
+        <center>
+            <audio src="./audios/MIR/origin.mp3" controls="controls"></audio>
+        </center>
+        <table align="center">
+            <thead>
+                <tr>
+                    <th>Model\Source</th>
+                    <th>Vocals</th>
+                    <th>Accompaniments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th style="font-style: italic;">GroundTruth</th>
+                    <th><audio src="./audios/MIR/vocal.mp3" controls="controls"></audio></th>
+                    <th><audio src="./audios/MIR/accom.mp3" controls="controls"></audio></th>
+                </tr>
+                <tr>
+                    <th>Wave-U-Net</th>
+                    <th><audio src="./audios/MIR/wave-vocal.mp3" controls="controls"></audio></th>
+                    <th><audio src="./audios/MIR/wave-accom.mp3" controls="controls"></audio></th>
+                </tr>
+                <tr>
+                    <th>Spleeter</th>
+                    <th><audio src="./audios/MIR/spleeter-vocal.mp3" controls="controls"></audio></th>
+                    <th><audio src="./audios/MIR/spleeter-accom.mp3" controls="controls"></audio></th>
+                </tr>
+                <tr>
+                    <th>Open-Unmix</th>
+                    <th><audio src="./audios/MIR/unmix-vocal.mp3" controls="controls"></audio></th>
+                    <th><audio src="./audios/MIR/unmix-accom.mp3" controls="controls"></audio></th>
+                </tr>
+                <tr>
+                    <th>Hybrid Demucs</th>
+                    <th><audio src="./audios/MIR/demucs-vocal.mp3" controls="controls"></audio></th>
+                    <th><audio src="./audios/MIR/demucs-accom.mp3" controls="controls"></audio></th>
+                </tr>
+                <tr>
+                    <th style="font-weight: bold;">Ours</th>
+                    <th><audio src="./audios/MIR/ours-vocal.mp3" controls="controls"></audio></th>
+                    <th><audio src="./audios/MIR/ours-accom.mp3" controls="controls"></audio></th>
+                </tr>
+            </tbody>
+        </table>
+        <div class="subtitle">
+            Audio Samples (MUSDB18)
+        </div>
+        <div class="text">
+            &emsp;The following clip is selected from the MUSDB18 test set (Little Chicago's Finest - My Own):
+        </div>
+        <center>
+            <audio src="./audios/MUS/mixture.mp3" controls="controls"></audio>
+        </center>
+        <table align="center">
+            <thead>
+                <tr>
+                    <th>Model\Source</th>
+                    <th>Drums</th>
+                    <th>Bass</th>
+                    <th>Other</th>
+                    <th>Vocals</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th style="font-style: italic;">GroundTruth</th>
+                    <th><audio src="./audios/MUS/groundtruth/drums.mp3" controls="controls"></audio></th>
+                    <th><audio src="./audios/MUS/groundtruth/bass.mp3" controls="controls"></audio></th>
+                    <th><audio src="./audios/MUS/groundtruth/other.mp3" controls="controls"></audio></th>
+                    <th><audio src="./audios/MUS/groundtruth/vocals.mp3" controls="controls"></audio></th>
+                </tr>
+                <tr>
+                    <th>Wave-U-Net</th>
+                    <th><audio src=" ./audios/MUS/wave-u-net/drums.mp3 " controls="controls "></audio></th>
+                    <th><audio src="./audios/MUS/wave-u-net/bass.mp3 " controls="controls "></audio></th>
+                    <th><audio src="./audios/MUS/wave-u-net/other.mp3 " controls="controls "></audio></th>
+                    <th><audio src="./audios/MUS/wave-u-net/vocals.mp3 " controls="controls "></audio></th>
+                </tr>
+                <tr>
+                    <th>Open-Unmix</th>
+                    <th><audio src=" ./audios/MUS/open-unmix/drums.mp3 " controls="controls "></audio></th>
+                    <th><audio src="./audios/MUS/open-unmix/bass.mp3 " controls="controls "></audio></th>
+                    <th><audio src="./audios/MUS/open-unmix/other.mp3 " controls="controls "></audio></th>
+                    <th><audio src="./audios/MUS/open-unmix/vocals.mp3 " controls="controls "></audio></th>
+                </tr>
+                <tr>
+                    <th>Hybrid Demucs</th>
+                    <th><audio src=" ./audios/MUS/demucs/drums.mp3 " controls="controls "></audio></th>
+                    <th><audio src="./audios/MUS/demucs/bass.mp3 " controls="controls "></audio></th>
+                    <th><audio src="./audios/MUS/demucs/other.mp3 " controls="controls "></audio></th>
+                    <th><audio src="./audios/MUS/demucs/vocals.mp3 " controls="controls "></audio></th>
+                </tr>
+                <tr>
+                    <th style="font-weight: bold; ">Ours</th>
+                    <th><audio src=" ./audios/MUS/ours/drums.mp3 " controls="controls "></audio></th>
+                    <th><audio src="./audios/MUS/ours/bass.mp3 " controls="controls "></audio></th>
+                    <th><audio src="./audios/MUS/ours/other.mp3 " controls="controls "></audio></th>
+                    <th><audio src="./audios/MUS/ours/vocals.mp3 " controls="controls "></audio></th>
+                </tr>
+            </tbody>
+        </table>
+        <div class="subtitle ">
+            Extra Samples
+        </div>
+        <div class="text ">
+            &emsp;The following clips demonstrate the model's ability to perform music source separation on unseen samples:
+            <br> &emsp;The samples are to show the performance of the proposed method (under review), please do not use them for any other purposes.
+        </div>
+        <center>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model\Source</th>
+                        <th style="font-style: italic; font-weight: bold;">Mixture</th>
+                        <th>Drums</th>
+                        <th>Bass</th>
+                        <th>Other</th>
+                        <th>Vocals</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>English</th>
+                        <th><audio src="./audios/Extras/English/mixture.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/English/drums.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/English/bass.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/English/other.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/English/vocals.mp3 " controls="controls "></audio></th>
+                    </tr>
+                    <tr>
+                        <th>Chinese</th>
+                        <th><audio src="./audios/Extras/Chinese/mixture.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/Chinese/drums.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/Chinese/bass.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/Chinese/other.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/Chinese/vocals.mp3 " controls="controls "></audio></th>
+                    </tr>
+                    <tr>
+                        <th>Japanese</th>
+                        <th><audio src="./audios/Extras/Japanese/mixture.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/Japanese/drums.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/Japanese/bass.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/Japanese/other.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/Japanese/vocals.mp3 " controls="controls "></audio></th>
+                    </tr>
+                    <tr>
+                        <th>Korean</th>
+                        <th><audio src="./audios/Extras/Korean/mixture.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/Korean/drums.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/Korean/bass.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/Korean/other.mp3 " controls="controls "></audio></th>
+                        <th><audio src="./audios/Extras/Korean/vocals.mp3 " controls="controls "></audio></th>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
+        <center>
+            <center>
+                <div style="padding-top:20px; font-family: Arial, Helvetica, sans-serif; font-size: 0.85em; text-align: center;" class="text ">
+                    * All the clips in this demo are compressed.
+                    <br><br> * For the "bass" sources, we recommend you turning up the volume.
+                </div>
+            </center>
+            <div style="padding-bottom: 50px; ">
+            </div>
+        </center>
+</body>
+
+</html>
